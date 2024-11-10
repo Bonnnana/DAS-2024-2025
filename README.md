@@ -1,7 +1,8 @@
 # DAS-2024-2025
 
 ### Homework 1 - Timer Showcase
-[![Homework 1 - Timer Showcase](https://i.vimeocdn.com/video/1028118675_640.jpg)](https://vimeo.com/1028118675)
+[![Homework 1 - Timer Showcase](https://i.vimeocdn.com/video/1948219210-8acd46e4e8019297bef4e56305c991f824abc574c3833a2821ed7599df3fbc5c-d?f=webp)](https://vimeo.com/1028118675)
+
 
 
 
