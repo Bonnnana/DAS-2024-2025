@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from typing import List
 
-from filters.base_filter import Filter
+from base_filter import Filter
 
 
 class ImportAllStocksFilter(Filter):

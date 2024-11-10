@@ -1,10 +1,12 @@
+"""FILTER 3"""
+
 import asyncio
 import aiohttp
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from typing import List
 
-from filters.base_filter import Filter
+from base_filter import Filter
 
 
 class FetchDataFilter(Filter):

@@ -3,7 +3,7 @@
 import sqlite3
 from datetime import datetime, timedelta
 from typing import List
-from filters.base_filter import Filter
+from base_filter import Filter
 
 
 class CheckLastDateFilter(Filter):
