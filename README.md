@@ -1,5 +1,7 @@
 # DAS-2024-2025
 
+This section showcases the functionalities developed as part of the assignments for the **Software Design and Architecture** course. Below, you can find demonstration videos.
+
 ### Homework 2 - Tech Prototype 
 [![Homework 2 - Tech Prototype](https://i.vimeocdn.com/video/1957719319-ac67528b6a01516eb7a7cac18949a357591b4e4f82301edae4830dbe641dedae-d?f=webp)](https://vimeo.com/1036081107?share=copy)
 
