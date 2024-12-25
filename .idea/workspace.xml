@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="884bd717-6f5c-4311-bd92-ec1a011ed9a9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Homework 1/all_issuers_data.db" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/all_issuers_data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/filters/check_last_date_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/filters/check_last_date_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/filters/fetch_missing_data_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/filters/fetch_missing_data_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/filters/import_all_stocks_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/filters/import_all_stocks_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webApi/stockApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApi/stockApi.py" afterDir="false" />
+    <list default="true" id="884bd717-6f5c-4311-bd92-ec1a011ed9a9" name="Changes" comment="some needed changes">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c0e562c4-d960-44c1-8e1d-c2d0d55bda34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c0e562c4-d960-44c1-8e1d-c2d0d55bda34.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,39 +56,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.check_last_date_filter.executor": "Run",
-    "Python.database.executor": "Debug",
-    "Python.filter1.executor": "Run",
-    "Python.import_all_stocks_filter.executor": "Run",
-    "Python.initialize_database.executor": "Run",
-    "Python.main (1).executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.most_liquid.executor": "Run",
-    "Python.probno.executor": "Debug",
-    "Python.stockApi.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
-    "git-widget-placeholder": "main",
-    "grid.search.filter.rows": "true",
-    "last_opened_file_path": "C:/Users/Bojana/AppData/Local/Programs/Python/Python37",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "terminal",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.check_last_date_filter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.database.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.filter1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.import_all_stocks_filter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.initialize_database.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.most_liquid.executor&quot;: &quot;Run&quot;,
+    &quot;Python.probno.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.stockApi.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;grid.search.filter.rows&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Bojana/AppData/Local/Programs/Python/Python37&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Bojana\Desktop\DIANS\filters" />
@@ -213,6 +209,7 @@
       <workItem from="1734778157391" duration="335000" />
       <workItem from="1734778509197" duration="1307000" />
       <workItem from="1734796655758" duration="1089000" />
+      <workItem from="1735130333240" duration="622000" />
     </task>
     <task id="LOCAL-00001" summary="Uploading firts homework">
       <option name="closed" value="true" />
@@ -274,7 +271,8 @@
     <MESSAGE value="Created web API" />
     <MESSAGE value="Adding Homework 3" />
     <MESSAGE value="Adding Homework 3 directory and most_liquid file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Homework 3 directory and most_liquid file" />
+    <MESSAGE value="some needed changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="some needed changes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DAS_2024_2025$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1734778099010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 1" />
