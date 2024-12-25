@@ -1,0 +1,256 @@
+Index: webApi/stockApi.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\nfrom flask import Flask, jsonify, request\nfrom flask_cors import CORS\nimport sqlite3\n\napp = Flask(__name__)\nCORS(app)\n# Enable CORS for all routes\n\n# Database path\ndb_path = '../Homework 1/all_issuers_data.db'\n\n\n# Function to connect to the SQLite database\ndef connect_db():\n    try:\n        conn = sqlite3.connect(db_path)\n        conn.row_factory = sqlite3.Row  # Enables column name-based access\n        print(\"Database connection established successfully.\")\n        return conn\n    except sqlite3.Error as e:\n        print(f\"Error connecting to the database: {e}\")\n        return None\n\n\n# Route to fetch all unique issuers data\n@app.route('/issuers_data', methods=['GET'])\ndef get_issuers_data():\n    conn = connect_db()\n    cursor = conn.cursor()\n\n    # SQL query to select unique ISSUER names\n    cursor.execute(\"SELECT DISTINCT ISSUER FROM issuers_data\")\n    rows = cursor.fetchall()\n    conn.close()\n\n    # Convert rows to a list of issuer names\n    issuers = [row['ISSUER'] for row in rows]\n    return jsonify(issuers)\n\n\n@app.route('/issuers_data/<issuer>', methods=['GET'])\ndef get_issuer_data(issuer):\n    conn = connect_db()\n    cursor = conn.cursor()\n\n    # Convert issuer to uppercase for case-insensitive matching\n    issuer = issuer.upper()\n\n    # SQL query to fetch all data for the specified issuer\n    cursor.execute(\"SELECT * FROM issuers_data WHERE ISSUER = ? ORDER BY DATE DESC\", (issuer,))\n    rows = cursor.fetchall()  # Fetch all rows matching the issuer\n    conn.close()\n\n    if rows:\n        # Add a 'line_number' to each row in the list\n        result = [{\"line_number\": index + 1, **dict(row)} for index, row in enumerate(rows)]\n        return jsonify(result)\n    else:\n        return jsonify({'error': 'Data not found for the specified issuer'}), 404\n\nif __name__ == '__main__':\n    app.run(debug=True)\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/webApi/stockApi.py b/webApi/stockApi.py
+--- a/webApi/stockApi.py	(revision b57ffe13b03b413c1b3e14c185cee1e787f4e8cf)
++++ b/webApi/stockApi.py	(date 1734793244804)
+@@ -47,9 +47,29 @@
+     # Convert issuer to uppercase for case-insensitive matching
+     issuer = issuer.upper()
+ 
+-    # SQL query to fetch all data for the specified issuer
+-    cursor.execute("SELECT * FROM issuers_data WHERE ISSUER = ? ORDER BY DATE DESC", (issuer,))
+-    rows = cursor.fetchall()  # Fetch all rows matching the issuer
++    # Extract query parameters
++    start_date = request.args.get('startDate')
++    end_date = request.args.get('endDate')
++
++    # Build the SQL query
++    if start_date and end_date:
++        query = """
++            SELECT * FROM issuers_data 
++            WHERE ISSUER = ? AND DATE BETWEEN ? AND ?
++            ORDER BY DATE DESC
++        """
++        params = [issuer, start_date, end_date]
++    else:
++        query = """
++            SELECT * FROM issuers_data 
++            WHERE ISSUER = ?
++            ORDER BY DATE DESC
++        """
++        params = [issuer]
++
++    # Execute the query
++    cursor.execute(query, params)
++    rows = cursor.fetchall()  # Fetch all rows matching the query
+     conn.close()
+ 
+     if rows:
+@@ -57,7 +77,7 @@
+         result = [{"line_number": index + 1, **dict(row)} for index, row in enumerate(rows)]
+         return jsonify(result)
+     else:
+-        return jsonify({'error': 'Data not found for the specified issuer'}), 404
++        return jsonify({'error': 'No data found for the specified issuer'}), 404
+ 
+ if __name__ == '__main__':
+     app.run(debug=True)
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"884bd717-6f5c-4311-bd92-ec1a011ed9a9\" name=\"Changes\" comment=\"Created web API\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"FlaskConsoleOptions\" custom-start-script=\"import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\\nApp: %s [%s]\\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))\">\n    <envs>\n      <env key=\"FLASK_APP\" value=\"app\" />\n    </envs>\n    <option name=\"myCustomStartScript\" value=\"import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\\nApp: %s [%s]\\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))\" />\n    <option name=\"myEnvs\">\n      <map>\n        <entry key=\"FLASK_APP\" value=\"app\" />\n      </map>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"PREVIOUS_COMMIT_AUTHORS\">\n      <list>\n        <option value=\"Atanas Vitanov &lt;atanas_vitanov@yahoo.com&gt;\" />\n      </list>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 7\n}</component>\n  <component name=\"ProjectId\" id=\"2oUX3YlEaC0YMoPogmbdVt0cd3w\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;Python.check_last_date_filter.executor&quot;: &quot;Run&quot;,\n    &quot;Python.database.executor&quot;: &quot;Debug&quot;,\n    &quot;Python.filter1.executor&quot;: &quot;Run&quot;,\n    &quot;Python.import_all_stocks_filter.executor&quot;: &quot;Run&quot;,\n    &quot;Python.initialize_database.executor&quot;: &quot;Run&quot;,\n    &quot;Python.main.executor&quot;: &quot;Run&quot;,\n    &quot;Python.probno.executor&quot;: &quot;Debug&quot;,\n    &quot;Python.stockApi.executor&quot;: &quot;Run&quot;,\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\n    &quot;grid.search.filter.rows&quot;: &quot;true&quot;,\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/Bojana/Desktop/DIANS/Homework 1&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  },\n  &quot;keyToStringList&quot;: {\n    &quot;DatabaseDriversLRU&quot;: [\n      &quot;sqlite&quot;\n    ]\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\Bojana\\Desktop\\DIANS\\filters\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"check_last_date_filter\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DIANS\" />\n      <option name=\"ENV_FILES\" value=\"\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"SCRIPT_NAME\" value=\"C:\\Users\\Bojana\\Desktop\\DIANS\\filters\\check_last_date_filter.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"database\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DIANS\" />\n      <option name=\"ENV_FILES\" value=\"\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"SCRIPT_NAME\" value=\"C:\\Users\\Bojana\\Desktop\\DIANS\\database.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"import_all_stocks_filter\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DIANS\" />\n      <option name=\"ENV_FILES\" value=\"\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"SCRIPT_NAME\" value=\"C:\\Users\\Bojana\\Desktop\\DIANS\\filters\\import_all_stocks_filter.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"main\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DIANS\" />\n      <option name=\"ENV_FILES\" value=\"\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"SDK_NAME\" value=\"Python 3.12\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"probno\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"DIANS\" />\n      <option name=\"ENV_FILES\" value=\"\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/probno.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <list>\n      <item itemvalue=\"Python.check_last_date_filter\" />\n      <item itemvalue=\"Python.database\" />\n      <item itemvalue=\"Python.import_all_stocks_filter\" />\n      <item itemvalue=\"Python.main\" />\n      <item itemvalue=\"Python.probno\" />\n    </list>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Python.main\" />\n        <item itemvalue=\"Python.probno\" />\n        <item itemvalue=\"Python.check_last_date_filter\" />\n        <item itemvalue=\"Python.import_all_stocks_filter\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"884bd717-6f5c-4311-bd92-ec1a011ed9a9\" name=\"Changes\" comment=\"\" />\n      <created>1730924930225</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1730924930225</updated>\n      <workItem from=\"1730924941347\" duration=\"4896000\" />\n      <workItem from=\"1731010905600\" duration=\"15733000\" />\n      <workItem from=\"1731168740302\" duration=\"24132000\" />\n      <workItem from=\"1731231089945\" duration=\"5135000\" />\n      <workItem from=\"1733226919660\" duration=\"841000\" />\n      <workItem from=\"1733227799961\" duration=\"1984000\" />\n      <workItem from=\"1733268584377\" duration=\"62000\" />\n      <workItem from=\"1733273818101\" duration=\"594000\" />\n      <workItem from=\"1733274424464\" duration=\"3903000\" />\n      <workItem from=\"1733318947103\" duration=\"3345000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Uploading firts homework\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1731235708595</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1731235708595</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Adding csv file with data\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1731237546491</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1731237546491</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Created web API\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1733328656191</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1733328656191</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Created web API\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1733328678751</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1733328678752</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"5\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Uploading firts homework\" />\n    <MESSAGE value=\"Adding csv file with data\" />\n    <MESSAGE value=\"Created web API\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Created web API\" />\n  </component>\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\n    <SUITE FILE_PATH=\"coverage/DIANS$filter1.coverage\" NAME=\"filter1 Coverage Results\" MODIFIED=\"1730929634953\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\n    <SUITE FILE_PATH=\"coverage/DAS_2024_2025$stockApi.coverage\" NAME=\"stockApi Coverage Results\" MODIFIED=\"1733318966551\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/webApi\" />\n    <SUITE FILE_PATH=\"coverage/DIANS$initialize_database.coverage\" NAME=\"initialize_database Coverage Results\" MODIFIED=\"1731022147625\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\n    <SUITE FILE_PATH=\"coverage/DIANS$import_all_stocks_filter.coverage\" NAME=\"import_all_stocks_filter Coverage Results\" MODIFIED=\"1731020498316\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\n    <SUITE FILE_PATH=\"coverage/DIANS$probno.coverage\" NAME=\"probno Coverage Results\" MODIFIED=\"1731189392361\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\n    <SUITE FILE_PATH=\"coverage/DAS_2024_2025$database.coverage\" NAME=\"database Coverage Results\" MODIFIED=\"1733275270276\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/Homework 1\" />\n    <SUITE FILE_PATH=\"coverage/DIANS$main.coverage\" NAME=\"main Coverage Results\" MODIFIED=\"1731235403075\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\n    <SUITE FILE_PATH=\"coverage/DIANS$check_last_date_filter.coverage\" NAME=\"check_last_date_filter Coverage Results\" MODIFIED=\"1731022133490\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision b57ffe13b03b413c1b3e14c185cee1e787f4e8cf)
++++ b/.idea/workspace.xml	(date 1734802548527)
+@@ -4,7 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="884bd717-6f5c-4311-bd92-ec1a011ed9a9" name="Changes" comment="Created web API" />
++    <list default="true" id="884bd717-6f5c-4311-bd92-ec1a011ed9a9" name="Changes" comment="Created web API">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/webApi/stockApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApi/stockApi.py" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -83,7 +86,7 @@
+       <recent name="C:\Users\Bojana\Desktop\DIANS\filters" />
+     </key>
+   </component>
+-  <component name="RunManager">
++  <component name="RunManager" selected="Python.stockApi">
+     <configuration name="check_last_date_filter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="DIANS" />
+       <option name="ENV_FILES" value="" />
+@@ -107,7 +110,7 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++    <configuration name="import_all_stocks_filter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="DIANS" />
+       <option name="ENV_FILES" value="" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+@@ -121,7 +124,7 @@
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="C:\Users\Bojana\Desktop\DIANS\database.py" />
++      <option name="SCRIPT_NAME" value="C:\Users\Bojana\Desktop\DIANS\filters\import_all_stocks_filter.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -130,7 +133,7 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="import_all_stocks_filter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="DIANS" />
+       <option name="ENV_FILES" value="" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+@@ -139,12 +142,13 @@
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
++      <option name="SDK_NAME" value="Python 3.12" />
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
++      <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="C:\Users\Bojana\Desktop\DIANS\filters\import_all_stocks_filter.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -153,7 +157,7 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++    <configuration name="probno" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="DIANS" />
+       <option name="ENV_FILES" value="" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+@@ -162,13 +166,12 @@
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
+-      <option name="SDK_NAME" value="Python 3.12" />
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="false" />
++      <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/probno.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -177,8 +180,8 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="probno" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+-      <module name="DIANS" />
++    <configuration name="stockApi" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++      <module name="DAS-2024-2025" />
+       <option name="ENV_FILES" value="" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+@@ -186,12 +189,12 @@
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/webApi" />
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/probno.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webApi/stockApi.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -201,14 +204,15 @@
+       <method v="2" />
+     </configuration>
+     <list>
++      <item itemvalue="Python.stockApi" />
+       <item itemvalue="Python.check_last_date_filter" />
+-      <item itemvalue="Python.database" />
+       <item itemvalue="Python.import_all_stocks_filter" />
+       <item itemvalue="Python.main" />
+       <item itemvalue="Python.probno" />
+     </list>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Python.stockApi" />
+         <item itemvalue="Python.main" />
+         <item itemvalue="Python.probno" />
+         <item itemvalue="Python.check_last_date_filter" />
+@@ -240,7 +244,10 @@
+       <workItem from="1733268584377" duration="62000" />
+       <workItem from="1733273818101" duration="594000" />
+       <workItem from="1733274424464" duration="3903000" />
+-      <workItem from="1733318947103" duration="3345000" />
++      <workItem from="1733318947103" duration="4291000" />
++      <workItem from="1734737299119" duration="1796000" />
++      <workItem from="1734747040711" duration="1244000" />
++      <workItem from="1734790591156" duration="6341000" />
+     </task>
+     <task id="LOCAL-00001" summary="Uploading firts homework">
+       <option name="closed" value="true" />
+@@ -274,12 +281,39 @@
+       <option name="project" value="LOCAL" />
+       <updated>1733328678752</updated>
+     </task>
+-    <option name="localTasksCounter" value="5" />
++    <task id="LOCAL-00005" summary="Created web API">
++      <option name="closed" value="true" />
++      <created>1733329268267</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1733329268267</updated>
++    </task>
++    <task id="LOCAL-00006" summary="Created web API">
++      <option name="closed" value="true" />
++      <created>1733329281045</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1733329281045</updated>
++    </task>
++    <option name="localTasksCounter" value="7" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Uploading firts homework" />
+     <MESSAGE value="Adding csv file with data" />
+@@ -288,7 +322,7 @@
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+     <SUITE FILE_PATH="coverage/DIANS$filter1.coverage" NAME="filter1 Coverage Results" MODIFIED="1730929634953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-    <SUITE FILE_PATH="coverage/DAS_2024_2025$stockApi.coverage" NAME="stockApi Coverage Results" MODIFIED="1733318966551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webApi" />
++    <SUITE FILE_PATH="coverage/DAS_2024_2025$stockApi.coverage" NAME="stockApi Coverage Results" MODIFIED="1734747059802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webApi" />
+     <SUITE FILE_PATH="coverage/DIANS$initialize_database.coverage" NAME="initialize_database Coverage Results" MODIFIED="1731022147625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/DIANS$import_all_stocks_filter.coverage" NAME="import_all_stocks_filter Coverage Results" MODIFIED="1731020498316" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/DIANS$probno.coverage" NAME="probno Coverage Results" MODIFIED="1731189392361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
