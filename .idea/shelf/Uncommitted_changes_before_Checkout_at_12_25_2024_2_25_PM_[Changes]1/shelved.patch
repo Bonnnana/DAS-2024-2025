@@ -1,0 +1,33 @@
+Index: .idea/vcs.xml
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+deleted file mode 100644
+--- a/.idea/vcs.xml	
++++ /dev/null	
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/dataSources.local.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"dataSourceStorageLocal\" created-in=\"PY-233.13763.11\">\r\n    <data-source name=\"all_issuers_data\" uuid=\"c0e562c4-d960-44c1-8e1d-c2d0d55bda34\">\r\n      <database-info product=\"SQLite\" version=\"3.45.1\" jdbc-version=\"4.2\" driver-name=\"SQLite JDBC\" driver-version=\"3.45.1.0\" dbms=\"SQLITE\" exact-version=\"3.45.1\" exact-driver-version=\"3.45\">\r\n        <identifier-quote-string>&quot;</identifier-quote-string>\r\n      </database-info>\r\n      <case-sensitivity plain-identifiers=\"mixed\" quoted-identifiers=\"mixed\" />\r\n      <auth-provider>no-auth</auth-provider>\r\n      <schema-mapping>\r\n        <introspection-scope>\r\n          <node kind=\"schema\" qname=\"@\" />\r\n        </introspection-scope>\r\n      </schema-mapping>\r\n    </data-source>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.local.xml b/.idea/dataSources.local.xml
+--- a/.idea/dataSources.local.xml	
++++ b/.idea/dataSources.local.xml	
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="dataSourceStorageLocal" created-in="PY-233.13763.11">
+-    <data-source name="all_issuers_data" uuid="c0e562c4-d960-44c1-8e1d-c2d0d55bda34">
++    <data-source name="all_issuers_data" uuid="d5217eb9-0ccc-490c-81e3-bf0edc6488a4">
+       <database-info product="SQLite" version="3.45.1" jdbc-version="4.2" driver-name="SQLite JDBC" driver-version="3.45.1.0" dbms="SQLITE" exact-version="3.45.1" exact-driver-version="3.45">
+         <identifier-quote-string>&quot;</identifier-quote-string>
+       </database-info>
