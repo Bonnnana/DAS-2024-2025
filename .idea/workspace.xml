@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="884bd717-6f5c-4311-bd92-ec1a011ed9a9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Homework 1/all_issuers_data.db" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/all_issuers_data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/filters/check_last_date_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/filters/check_last_date_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/filters/fetch_missing_data_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/filters/fetch_missing_data_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/filters/import_all_stocks_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/filters/import_all_stocks_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webApi/stockApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/webApi/stockApi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework 3/fundamental/companies_code_mapping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DAS-2024-2025.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DAS-2024-2025.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/aa082afa-43ae-44d2-9dd9-28ff68d30c05.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/aa082afa-43ae-44d2-9dd9-28ff68d30c05/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c0e562c4-d960-44c1-8e1d-c2d0d55bda34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c0e562c4-d960-44c1-8e1d-c2d0d55bda34.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_25_2024_2_25_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_25_2024_2_25_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_25_2024_2_25_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_25_2024_2_25_PM__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_25_2024_16_33__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,45 +64,93 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.check_last_date_filter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.database.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.filter1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.import_all_stocks_filter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.initialize_database.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.most_liquid.executor&quot;: &quot;Run&quot;,
-    &quot;Python.probno.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.stockApi.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;grid.search.filter.rows&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Bojana/AppData/Local/Programs/Python/Python37&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.check_last_date_filter.executor": "Run",
+    "Python.collecting_news_data.executor": "Run",
+    "Python.database.executor": "Debug",
+    "Python.filter1.executor": "Run",
+    "Python.fundamental_analysis.executor": "Run",
+    "Python.import_all_stocks_filter.executor": "Run",
+    "Python.initialize_database.executor": "Run",
+    "Python.main (1).executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.most_liquid.executor": "Run",
+    "Python.probno.executor": "Debug",
+    "Python.stockApi.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "git-widget-placeholder": "main",
+    "grid.search.filter.rows": "true",
+    "last_opened_file_path": "C:/Users/Bojana/AppData/Local/Programs/Python/Python37",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Bojana\Desktop\DIANS\filters" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.most_liquid">
+  <component name="RunManager" selected="Python.fundamental_analysis">
+    <configuration name="collecting_news_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="DAS-2024-2025" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Homework 3/fundamental" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Homework 3/fundamental/collecting_news_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="fundamental_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="DAS-2024-2025" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Homework 3/fundamental" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Homework 3/fundamental/fundamental_analysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DAS-2024-2025" />
       <option name="ENV_FILES" value="" />
@@ -169,12 +221,16 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.collecting_news_data" />
+      <item itemvalue="Python.fundamental_analysis" />
       <item itemvalue="Python.most_liquid" />
       <item itemvalue="Python.stockApi" />
       <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.fundamental_analysis" />
+        <item itemvalue="Python.collecting_news_data" />
         <item itemvalue="Python.most_liquid" />
         <item itemvalue="Python.stockApi" />
         <item itemvalue="Python.main" />
@@ -184,7 +240,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5a2391486177-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13763.11" />
+        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
       </set>
     </attachedChunks>
   </component>
@@ -213,6 +269,7 @@
       <workItem from="1734778157391" duration="335000" />
       <workItem from="1734778509197" duration="1307000" />
       <workItem from="1734796655758" duration="1089000" />
+      <workItem from="1735391888427" duration="6145000" />
     </task>
     <task id="LOCAL-00001" summary="Uploading firts homework">
       <option name="closed" value="true" />
@@ -277,16 +334,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="Adding Homework 3 directory and most_liquid file" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DAS_2024_2025$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1734778099010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 1" />
-    <SUITE FILE_PATH="coverage/DIANS$initialize_database.coverage" NAME="initialize_database Coverage Results" MODIFIED="1731022147625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DAS_2024_2025$database.coverage" NAME="database Coverage Results" MODIFIED="1733275270276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 1" />
+    <SUITE FILE_PATH="coverage/DAS_2024_2025$fundamental_analysis.coverage" NAME="fundamental_analysis Coverage Results" MODIFIED="1735399006944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 3/fundamental" />
+    <SUITE FILE_PATH="coverage/DAS_2024_2025$collecting_news_data.coverage" NAME="collecting_news_data Coverage Results" MODIFIED="1735395782981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 3/fundamental" />
+    <SUITE FILE_PATH="coverage/DIANS$main.coverage" NAME="main Coverage Results" MODIFIED="1731235403075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DAS_2024_2025$main.coverage" NAME="main Coverage Results" MODIFIED="1734779022656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 1" />
     <SUITE FILE_PATH="coverage/DAS_2024_2025$most_liquid.coverage" NAME="most_liquid Coverage Results" MODIFIED="1734797571330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 3" />
-    <SUITE FILE_PATH="coverage/DIANS$check_last_date_filter.coverage" NAME="check_last_date_filter Coverage Results" MODIFIED="1731022133490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DIANS$filter1.coverage" NAME="filter1 Coverage Results" MODIFIED="1730929634953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DIANS$main.coverage" NAME="main Coverage Results" MODIFIED="1731235403075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DAS_2024_2025$stockApi.coverage" NAME="stockApi Coverage Results" MODIFIED="1734779192390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webApi" />
+    <SUITE FILE_PATH="coverage/DIANS$check_last_date_filter.coverage" NAME="check_last_date_filter Coverage Results" MODIFIED="1731022133490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DIANS$import_all_stocks_filter.coverage" NAME="import_all_stocks_filter Coverage Results" MODIFIED="1731020498316" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DIANS$probno.coverage" NAME="probno Coverage Results" MODIFIED="1731189392361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DIANS$initialize_database.coverage" NAME="initialize_database Coverage Results" MODIFIED="1731022147625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DAS_2024_2025$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1734778099010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 1" />
+    <SUITE FILE_PATH="coverage/DIANS$filter1.coverage" NAME="filter1 Coverage Results" MODIFIED="1730929634953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DAS_2024_2025$database.coverage" NAME="database Coverage Results" MODIFIED="1733275270276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 1" />
   </component>
 </project>
