@@ -101,5 +101,5 @@ def get_fundamental_analysis(company_code):
 
 
 # Example usage
-if __name__ == "__main__":
-    print(get_fundamental_analysis("TUM"))
+# if __name__ == "__main__":
+#     print(get_fundamental_analysis("KMB"))
