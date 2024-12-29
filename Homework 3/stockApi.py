@@ -8,10 +8,11 @@ homework1_dir = os.path.abspath(homework1_dir)
 # Add "Homework 1" folder to sys.path so Python can find model.py, pipeline.py, etc.
 sys.path.append(homework1_dir)
 # Now import the 'main' function from main.py
-from main import main as homework1_main
 from most_liquid import most_liquid_scrape
-from model import train_and_evaluate_stock_model
-
+from model import train_and_evaluate_stock_model_with_image
+from tech_analysis import perform_technical_analysis
+from fundamental_analysis import get_fundamental_analysis
+from pipeline import run_pipeline
 
 
 from flask import Flask, jsonify, request
@@ -24,7 +25,7 @@ CORS(app)
 # Enable CORS for all routes
 
 # Database path
-db_path = '../Homework 1/all_issuers_data.db'
+db_path = '../../proekt/Homework 1/all_issuers_data.db'
 
 
 # Function to connect to the SQLite database
@@ -105,19 +106,57 @@ def get_issuer_data(issuer):
 
 @app.route('/issuers_data/<issuer>/predict', methods=['GET'])
 def prediction(issuer):
-    prediction=train_and_evaluate_stock_model(stock_symbol=issuer)
-    data={}
-    if prediction == "ERROR the prediction can't be made":
-        data={
-            "error":"500",
-            "prediction":prediction
-        }
-    else: data={
-        "error":"/",
-        "prediction":prediction
-    }
-    return jsonify(data)
+    try:
+        prediction, img_base64 = train_and_evaluate_stock_model_with_image(stock_symbol=issuer)
+        if prediction == "ERROR the prediction can't be made":
+            return jsonify({"error": "500", "message": prediction})
+
+        return jsonify({
+            "error": None,
+            "prediction": prediction,
+            "image": img_base64
+        })
+
+    except Exception as e:
+        return jsonify({"error": "500", "message": str(e)}), 500
+
+
+@app.route('/issuers_data/<issuer>/technical', methods=['GET'])
+def issuers_technical_data(issuer):
+    """
+    Example:
+      GET /issuers_data/XYZ/technical?days=30
+    """
+    # Get 'days' from query params; default to 30 if not provided
+    days = request.args.get('days', default=30, type=int)
+
+    # Connect to the database
+    conn = connect_db()
+    if not conn:
+        return jsonify({"error": "Unable to connect to the database"}), 500
+
+    try:
+        # Run your analysis function
+        analysis_result = perform_technical_analysis(conn, issuer, days)
+        # Return the data as JSON
+        return jsonify(analysis_result), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        # Always close the database connection
+        conn.close()
+
+@app.route('/issuers_data/<issuer>/fundamental', methods=['GET'])
+def fundamental(issuer):
+    try:
+        # Run your analysis function
+        analysis_result = get_fundamental_analysis(issuer)
+        # Return the data as JSON
+        return jsonify(analysis_result), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    # homework1_main()
+    run_pipeline("../Homework 1/all_issuers_data.db")
     app.run(debug=True)
+

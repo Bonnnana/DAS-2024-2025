@@ -5,16 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="884bd717-6f5c-4311-bd92-ec1a011ed9a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Homework 3/fundamental/companies_code_mapping.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework 3/fundamental_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/DAS-2024-2025.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DAS-2024-2025.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/aa082afa-43ae-44d2-9dd9-28ff68d30c05.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/aa082afa-43ae-44d2-9dd9-28ff68d30c05/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c0e562c4-d960-44c1-8e1d-c2d0d55bda34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c0e562c4-d960-44c1-8e1d-c2d0d55bda34.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_25_2024_2_25_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_25_2024_2_25_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_25_2024_2_25_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_25_2024_2_25_PM__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_25_2024_16_33__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 3/fundamental/collecting_news_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/collecting_news_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 3/fundamental/companies_code_mapping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/companies_code_mapping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 3/fundamental/fundamental_analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 3/fundamental/news_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/news_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 3/fundamental/news_sentiment_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/news_sentiment_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 3/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 3/stockApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/stockApi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 3/tech_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/tech_analysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +87,7 @@
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "git-widget-placeholder": "main",
     "grid.search.filter.rows": "true",
-    "last_opened_file_path": "C:/Users/Bojana/AppData/Local/Programs/Python/Python37",
+    "last_opened_file_path": "C:/Users/atana/PycharmProjects/DAS-2024-2025/Homework 3",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -100,7 +103,11 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\atana\PycharmProjects\DAS-2024-2025\Homework 3" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\atana\PycharmProjects\DAS-2024-2025\Homework 3" />
       <recent name="C:\Users\Bojana\Desktop\DIANS\filters" />
     </key>
   </component>
@@ -119,7 +126,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Homework 3/fundamental/collecting_news_data.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\atana\PycharmProjects\DAS-2024-2025\Homework 3\collecting_news_data.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -142,7 +149,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Homework 3/fundamental/fundamental_analysis.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\atana\PycharmProjects\DAS-2024-2025\Homework 3\fundamental_analysis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -270,6 +277,7 @@
       <workItem from="1734778509197" duration="1307000" />
       <workItem from="1734796655758" duration="1089000" />
       <workItem from="1735391888427" duration="6145000" />
+      <workItem from="1735491293149" duration="331000" />
     </task>
     <task id="LOCAL-00001" summary="Uploading firts homework">
       <option name="closed" value="true" />

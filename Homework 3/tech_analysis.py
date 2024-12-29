@@ -78,19 +78,15 @@ def perform_technical_analysis(conn, issuer, timeperiod):
     """
     Main function to perform technical analysis
 
-    Args:
-        conn (sqlite3.Connection): Database connection.
-        issuer (str): Stock issuer.
-        timeperiod (int): Analysis period in days.
-
     Returns:
-        dict: Technical analysis summary.
+        dict: Technical analysis summary, now including
+              moving_average_summary and oscillator_summary
+              as lists of objects.
     """
     end_date = datetime.now()
     start_date = end_date - timedelta(days=365 * 2)
 
     data = fetch_historical_data(conn, issuer, start_date, end_date)
-
     if data.empty:
         return {"error": "No data available for this issuer in the selected period."}
 
@@ -99,6 +95,7 @@ def perform_technical_analysis(conn, issuer, timeperiod):
 
     selected_period = data.tail(timeperiod)
 
+    # -- Create dictionaries as before
     oscillator_summary = {
         "Relative Strength Index (RSI)": {
             "value": round(selected_period['RSI'].mean(), 2),
@@ -145,21 +142,48 @@ def perform_technical_analysis(conn, issuer, timeperiod):
         }
     }
 
+    # -- Summarize signals
     signal_counts = {
-        signal: sum([
-            1 for osc in oscillator_summary.values() if osc['signal'] == signal
-        ]) + sum([
-            1 for ma in moving_average_summary.values() if ma['signal'] == signal
-        ])
+        signal: (
+            sum(1 for osc in oscillator_summary.values() if osc['signal'] == signal) +
+            sum(1 for ma in moving_average_summary.values() if ma['signal'] == signal)
+        )
         for signal in ['BUY', 'SELL', 'HOLD']
     }
+    final_recommendation=""
+    if signal_counts['BUY'] == signal_counts['SELL']:
+        final_recommendation = 'HOLD'
+    else:
+        final_recommendation = max(signal_counts, key=signal_counts.get)
+
+    # -------------------------------
+    # CHANGED / ADDED:
+    # Convert each dictionary to a list of objects so that the final JSON
+    # is an array with text, value, and signal.
+    # -------------------------------
+    oscillator_summary_list = []
+    for indicator_name, info in oscillator_summary.items():
+        oscillator_summary_list.append({
+            "text": indicator_name,         # ADDED
+            "value": info["value"],         # ADDED
+            "signal": info["signal"]        # ADDED
+        })
+
+    moving_average_summary_list = []
+    for indicator_name, info in moving_average_summary.items():
+        moving_average_summary_list.append({
+            "text": indicator_name,         # ADDED
+            "value": info["value"],         # ADDED
+            "signal": info["signal"]        # ADDED
+        })
+    # -------------------------------
 
     result = {
-        "oscillator_summary": oscillator_summary,
-        "moving_average_summary": moving_average_summary,
+        # Instead of dicts, now we return arrays of objects
+        "oscillator_summary": oscillator_summary_list,      # CHANGED
+        "moving_average_summary": moving_average_summary_list,  # CHANGED
         "signal_counts": signal_counts,
-        "final_recommendation": max(signal_counts, key=signal_counts.get) if signal_counts['BUY'] != signal_counts[
-            'SELL'] else 'HOLD'
+        "final_recommendation": final_recommendation
     }
 
-    return json.dumps(result, indent=4)
+    return result
