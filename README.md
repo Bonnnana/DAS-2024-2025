@@ -14,7 +14,9 @@ This section showcases the functionalities developed as part of the assignments 
 
 ## Team Members:
 Bojana Andonova 221225
+
 Atanas Vitanov 221128
+
 Kalina Jovanovska 221183
 
 
