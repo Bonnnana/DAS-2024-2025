@@ -4,15 +4,15 @@ import matplotlib
 import pandas as pd
 import base64
 import numpy as np
-from xgboost import XGBClassifier
-from sklearn.metrics import accuracy_score, classification_report
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, LSTM, Dropout
 import matplotlib.pyplot as plt
 matplotlib.use('Agg')
 import io
 
 # Path to your SQLite database file
 db_path = '../../proekt/Homework 1/all_issuers_data.db'
-
 
 def connect_db():
     """
@@ -26,7 +26,6 @@ def connect_db():
     except sqlite3.Error as e:
         print(f"Error connecting to the database: {e}")
         return None
-
 
 def fix_numeric_format(value):
     """
@@ -42,18 +41,18 @@ def fix_numeric_format(value):
     standard_decimal = no_thousand_sep.replace(',', '.')
     return standard_decimal
 
-
 def train_and_evaluate_stock_model_with_image(
         stock_symbol,
-        train_ratio=0.8,
+        train_ratio=0.7,
         rolling_window=5,
-        n_estimators=100,
-        max_depth=3,
-        learning_rate=0.1
+        n_units=50,
+        dropout_rate=0.2,
+        epochs=20,
+        batch_size=32
 ):
     """
     Pulls data for 'stock_symbol' from issuers_data, fixes numeric formats,
-    engineers features, trains an XGBoost model, evaluates performance,
+    engineers features, trains an LSTM model, evaluates performance,
     and generates a line plot of stock prices over time.
     """
     # 1. Open database connection, query data, then close
@@ -114,29 +113,34 @@ def train_and_evaluate_stock_model_with_image(
         return "ERROR the prediction can't be made", None
 
     train_data = df.iloc[:train_size]
-    test_data = df.iloc[train_size:]
+    validation_data = df.iloc[train_size:]
 
-    X_train = train_data[feature_cols]
-    y_train = train_data['TARGET']
-    X_test = test_data[feature_cols]
-    y_test = test_data['TARGET']
+    X_train = train_data[feature_cols].values
+    y_train = train_data['TARGET'].values
+    X_validation = validation_data[feature_cols].values
+    y_validation = validation_data['TARGET'].values
 
-    # 5. Train the model
-    model = XGBClassifier(
-        n_estimators=n_estimators,
-        max_depth=max_depth,
-        learning_rate=learning_rate,
-        use_label_encoder=False,
-        eval_metric='logloss'
-    )
-    model.fit(X_train, y_train)
+    # Reshape data for LSTM (samples, timesteps, features)
+    X_train = X_train.reshape((X_train.shape[0], 1, X_train.shape[1]))
+    X_validation = X_validation.reshape((X_validation.shape[0], 1, X_validation.shape[1]))
+
+    # 5. Build and train the model
+    model = Sequential([
+        LSTM(n_units, input_shape=(X_train.shape[1], X_train.shape[2]), return_sequences=False),
+        Dropout(dropout_rate),
+        Dense(1, activation='sigmoid')
+    ])
+
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+    model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verbose=1)
 
     # 6. Predict and evaluate
-    y_pred = model.predict(X_test)
+    y_pred = (model.predict(X_validation) > 0.5).astype(int).flatten()
 
     latest_row = df.iloc[-1]
-    X_future = latest_row[feature_cols].values.reshape(1, -1)
-    future_pred = model.predict(X_future)[0]
+    X_future = latest_row[feature_cols].values.reshape(1, 1, -1)
+    future_pred = (model.predict(X_future) > 0.5).astype(int)[0][0]
     prediction = "UP" if future_pred == 1 else "DOWN"
 
     # 7. Generate line plot
@@ -146,7 +150,6 @@ def train_and_evaluate_stock_model_with_image(
     ax.set_ylabel('Price', fontsize=12)
     ax.tick_params(axis='x', which='both', labelbottom=False)
     ax.legend(loc='upper left', fontsize=10)
-    # plt.xticks(rotation=20)
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.tight_layout()
 
@@ -167,11 +170,12 @@ if __name__ == '__main__':
     test_symbol = "ALK"  # or any other issuer you want to test
     # model, acc, report, future_prediction = train_and_evaluate_stock_model_with_image(
     #     stock_symbol=test_symbol,
-    #     train_ratio=0.8,
+    #     train_ratio=0.7,
     #     rolling_window=5,
-    #     n_estimators=100,
-    #     max_depth=3,
-    #     learning_rate=0.1
+    #     n_units=50,
+    #     dropout_rate=0.2,
+    #     epochs=20,
+    #     batch_size=32
     # )
     #
     # if model is not None:
