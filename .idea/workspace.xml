@@ -5,31 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="884bd717-6f5c-4311-bd92-ec1a011ed9a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DAS-2024-2025.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DAS-2024-2025.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework 4/Design Patterns - Documentation.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Homework 3/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Homework 3/stock-app-web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/stock-app-web/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Homework 3/stockApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/stockApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/analysis_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/shared_logic/command_pattern/analysis_command.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/analysis_invoker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/shared_logic/command_pattern/analysis_invoker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/collecting_news_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service/collecting_news_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/companies_code_mapping.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/fundamental_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service/fundamental_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/fundamental_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service/fundamental_command.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/lstm_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/lstm_model_service/lstm_command.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/lstm_model_service/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/most_liquid.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/most_liquid_service/most_liquid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/news_data.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/news_sentiment_data.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/stockApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stockApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/tech_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/technical_analysis_service/tech_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/technical_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/technical_analysis_service/technical_command.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/Command Pattern.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/README.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -304,7 +285,7 @@
       <workItem from="1735498040059" duration="444000" />
       <workItem from="1736692601150" duration="1234000" />
       <workItem from="1736732756278" duration="28000" />
-      <workItem from="1737205818313" duration="12724000" />
+      <workItem from="1737205818313" duration="13096000" />
     </task>
     <task id="LOCAL-00001" summary="Uploading firts homework">
       <option name="closed" value="true" />
@@ -354,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734797730562</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Adding microservices and singleton pattern">
+      <option name="closed" value="true" />
+      <created>1737219839984</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1737219839984</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +355,8 @@
     <MESSAGE value="Created web API" />
     <MESSAGE value="Adding Homework 3" />
     <MESSAGE value="Adding Homework 3 directory and most_liquid file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Homework 3 directory and most_liquid file" />
+    <MESSAGE value="Adding microservices and singleton pattern" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding microservices and singleton pattern" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
