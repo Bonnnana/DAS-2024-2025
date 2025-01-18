@@ -1,5 +1,4 @@
 import os
-
 import requests
 import html
 import re
@@ -10,15 +9,8 @@ import csv
 from multiprocessing import Pool
 from datetime import datetime
 
-csv_file_path = "news_data.csv"
 
-# Initialize the CSV file with headers
-if not os.path.exists(csv_file_path):
-    with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow([
-            'Document_id', 'Date', 'Description', 'Content', 'Company_code', 'Company_whole_name'
-        ])
+CSV_FILE_PATH = "news_data.csv"
 
 parser = HTMLParser()
 
@@ -27,8 +19,8 @@ def process_news(data):
     try:
         document_id = data.get('documentId', '')
         content = data.get('content', '')
-        content = html.unescape(content)  # converts HTML-encoded characters to their standard form.
-        content = re.sub(r'<[^>]*>', '', content)  # # Removes all HTML tags from the content.
+        content = html.unescape(content)
+        content = re.sub(r'<[^>]*>', '', content)
         issuer_code = data['issuer']['code']
         whole_name = data['issuer']['localizedTerms'][0]['displayName']
         description = data['layout']['description']
@@ -48,13 +40,12 @@ def process_news(data):
                 if response.status_code == 200:
                     pdf_file = BytesIO(response.content)
                     with pdfplumber.open(pdf_file) as pdf:
-                        if pdf.pages:  # Ensure the PDF has at least one page
-                            pdf_text = pdf.pages[0].extract_text()  # Extract text only from the first page
+                        if pdf.pages:
+                            pdf_text = pdf.pages[0].extract_text()
                 content += "\n"
-                content += pdf_text # append the extracted text from the PDF file to the existing content
+                content += pdf_text
 
-        # Save to CSV
-        with open(csv_file_path, mode='a', newline='', encoding='utf-8') as csvfile:
+        with open(CSV_FILE_PATH, mode='a', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([
                 document_id, published_date, description, content, issuer_code, whole_name
@@ -73,7 +64,7 @@ def get_page_data(page):
         "channelId": 1,  # taking data from Web Page
         "dateFrom": start_date,
         "dateTo": end_date,
-        "isPushRequest": False,  # client-side data fetching (pulling)
+        "isPushRequest": False,
         "page": page
     }
     headers = {"Content-Type": "application/json"}
@@ -90,6 +81,22 @@ def get_page_data(page):
 
 
 def retrieve_data():
+    if os.path.exists(CSV_FILE_PATH):
+        print(f"The file '{CSV_FILE_PATH}' already exists.")
+        user_input = input("Do you want to delete it and start again? (yes/no): ").strip().lower()
+        if user_input == "yes":
+            os.remove(CSV_FILE_PATH)
+            print(f"File '{CSV_FILE_PATH}' deleted. Starting data retrieval...")
+        else:
+            print("Aborting data retrieval.")
+            return
+
+    with open(CSV_FILE_PATH, mode='w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([
+            'Document_id', 'Date', 'Description', 'Content', 'Company_code', 'Company_whole_name'
+        ])
+
     page = 1
     all_data = []
 
@@ -106,5 +113,6 @@ def retrieve_data():
         pool.map(process_news, all_data)
 
 
+# Example usage
 if __name__ == "__main__":
     retrieve_data()

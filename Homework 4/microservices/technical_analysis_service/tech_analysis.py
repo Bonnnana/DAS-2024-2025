@@ -1,7 +1,6 @@
 import pandas as pd
 import talib
 from datetime import datetime, timedelta
-import json
 
 
 def fetch_historical_data(conn, issuer, start_date, end_date):
@@ -76,7 +75,12 @@ def generate_signals(data):
 
 def perform_technical_analysis(conn, issuer, timeperiod):
     """
-    Main function to perform technical analysis
+    Performs technical analysis on stock data for a specified issuer.
+
+    Args:
+        conn (sqlite3.Connection): The database connection object used to retrieve stock data.
+        issuer (str): The stock issuer code for which the analysis is performed.
+        timeperiod (int): The number of most recent days to include in the analysis.
 
     Returns:
         dict: Technical analysis summary, now including
@@ -95,7 +99,6 @@ def perform_technical_analysis(conn, issuer, timeperiod):
 
     selected_period = data.tail(timeperiod)
 
-    # -- Create dictionaries as before
     oscillator_summary = {
         "Relative Strength Index (RSI)": {
             "value": round(selected_period['RSI'].mean(), 2),
@@ -142,46 +145,38 @@ def perform_technical_analysis(conn, issuer, timeperiod):
         }
     }
 
-    # -- Summarize signals
     signal_counts = {
         signal: (
-            sum(1 for osc in oscillator_summary.values() if osc['signal'] == signal) +
-            sum(1 for ma in moving_average_summary.values() if ma['signal'] == signal)
+                sum(1 for osc in oscillator_summary.values() if osc['signal'] == signal) +
+                sum(1 for ma in moving_average_summary.values() if ma['signal'] == signal)
         )
         for signal in ['BUY', 'SELL', 'HOLD']
     }
-    final_recommendation=""
+    final_recommendation = ""
     if signal_counts['BUY'] == signal_counts['SELL']:
         final_recommendation = 'HOLD'
     else:
         final_recommendation = max(signal_counts, key=signal_counts.get)
 
-    # -------------------------------
-    # CHANGED / ADDED:
-    # Convert each dictionary to a list of objects so that the final JSON
-    # is an array with text, value, and signal.
-    # -------------------------------
     oscillator_summary_list = []
     for indicator_name, info in oscillator_summary.items():
         oscillator_summary_list.append({
-            "text": indicator_name,         # ADDED
-            "value": info["value"],         # ADDED
-            "signal": info["signal"]        # ADDED
+            "text": indicator_name,
+            "value": info["value"],
+            "signal": info["signal"]
         })
 
     moving_average_summary_list = []
     for indicator_name, info in moving_average_summary.items():
         moving_average_summary_list.append({
-            "text": indicator_name,         # ADDED
-            "value": info["value"],         # ADDED
-            "signal": info["signal"]        # ADDED
+            "text": indicator_name,
+            "value": info["value"],
+            "signal": info["signal"]
         })
-    # -------------------------------
 
     result = {
-        # Instead of dicts, now we return arrays of objects
-        "oscillator_summary": oscillator_summary_list,      # CHANGED
-        "moving_average_summary": moving_average_summary_list,  # CHANGED
+        "oscillator_summary": oscillator_summary_list,
+        "moving_average_summary": moving_average_summary_list,
         "signal_counts": signal_counts,
         "final_recommendation": final_recommendation
     }

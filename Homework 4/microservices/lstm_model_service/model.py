@@ -1,62 +1,42 @@
-import sqlite3
-
+import io
 import matplotlib
+import matplotlib.pyplot as plt
 import pandas as pd
 import base64
 import numpy as np
-import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout
-import matplotlib.pyplot as plt
+from shared_logic.database.db_connection import DatabaseConnection
+
 matplotlib.use('Agg')
-import io
 
-# Path to your SQLite database file
-db_path = '../../Homework 1/all_issuers_data.db'
-
-def connect_db():
-    """
-    Opens a connection to the SQLite database and returns the connection object.
-    """
-    try:
-        conn = sqlite3.connect(db_path)
-        conn.row_factory = sqlite3.Row  # Enables column name-based access
-        print("Database connection established successfully.")
-        return conn
-    except sqlite3.Error as e:
-        print(f"Error connecting to the database: {e}")
-        return None
 
 def fix_numeric_format(value):
-    """
-    This function takes a numeric string in a European format, e.g. '6.928.265,00',
-    and returns a standard float-compatible string, e.g. '6928265.00'.
-    """
     if not isinstance(value, str):
-        # If it's already a float or int (or NaN), just return it as-is
         return value
-    # Remove all '.' (thousand separators)
     no_thousand_sep = value.replace('.', '')
-    # Replace ',' with '.' for decimals
     standard_decimal = no_thousand_sep.replace(',', '.')
     return standard_decimal
 
+
 def train_and_evaluate_stock_model_with_image(
         stock_symbol,
-        train_ratio=0.7,
-        rolling_window=5,
-        n_units=50,
-        dropout_rate=0.2,
-        epochs=20,
-        batch_size=32
+        train_ratio,
+        rolling_window,
+        n_units,
+        dropout_rate,
+        epochs,
+        batch_size
 ):
     """
     Pulls data for 'stock_symbol' from issuers_data, fixes numeric formats,
     engineers features, trains an LSTM model, evaluates performance,
     and generates a line plot of stock prices over time.
     """
-    # 1. Open database connection, query data, then close
-    connection = connect_db()
+
+    db_instance = DatabaseConnection()
+    connection = db_instance.get_connection()
+
     if connection is None:
         return "ERROR the prediction can't be made", None
 
@@ -67,7 +47,6 @@ def train_and_evaluate_stock_model_with_image(
     if df.empty:
         return "ERROR the prediction can't be made", None
 
-    # 2. Data preparation
     df.sort_values(by='DATE', inplace=True)
     df.reset_index(drop=True, inplace=True)
 
@@ -91,7 +70,6 @@ def train_and_evaluate_stock_model_with_image(
 
     df['TARGET'] = (df['LAST_TRADE_PRICE'].shift(-1) > df['LAST_TRADE_PRICE']).astype(int)
 
-    # 3. Feature Engineering
     df['PRICE_1DAY_AGO'] = df['LAST_TRADE_PRICE'].shift(1)
     df['PRICE_2DAYS_AGO'] = df['LAST_TRADE_PRICE'].shift(2)
     df['PRICE_3DAYS_AGO'] = df['LAST_TRADE_PRICE'].shift(3)
@@ -107,7 +85,6 @@ def train_and_evaluate_stock_model_with_image(
 
     df.dropna(subset=feature_cols + ['TARGET'], inplace=True)
 
-    # 4. Split data
     train_size = int(train_ratio * len(df))
     if train_size == 0 or train_size >= len(df):
         return "ERROR the prediction can't be made", None
@@ -120,11 +97,9 @@ def train_and_evaluate_stock_model_with_image(
     X_validation = validation_data[feature_cols].values
     y_validation = validation_data['TARGET'].values
 
-    # Reshape data for LSTM (samples, timesteps, features)
     X_train = X_train.reshape((X_train.shape[0], 1, X_train.shape[1]))
     X_validation = X_validation.reshape((X_validation.shape[0], 1, X_validation.shape[1]))
 
-    # 5. Build and train the model
     model = Sequential([
         LSTM(n_units, input_shape=(X_train.shape[1], X_train.shape[2]), return_sequences=False),
         Dropout(dropout_rate),
@@ -135,15 +110,13 @@ def train_and_evaluate_stock_model_with_image(
 
     model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verbose=1)
 
-    # 6. Predict and evaluate
     y_pred = (model.predict(X_validation) > 0.5).astype(int).flatten()
 
     latest_row = df.iloc[-1]
-    X_future = latest_row[feature_cols].values.reshape(1, 1, -1)
+    X_future = latest_row[feature_cols].values.astype(np.float32).reshape(1, 1, -1)
     future_pred = (model.predict(X_future) > 0.5).astype(int)[0][0]
     prediction = "UP" if future_pred == 1 else "DOWN"
 
-    # 7. Generate line plot
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(df['DATE'], df['LAST_TRADE_PRICE'], label='Last Trade Price', color='green', linewidth=2)
     ax.set_xlabel('Date', fontsize=12)
@@ -158,28 +131,26 @@ def train_and_evaluate_stock_model_with_image(
     img_io.seek(0)
     plt.close()
 
-    # Convert image to Base64
     img_base64 = base64.b64encode(img_io.read()).decode('utf-8')
 
     return prediction, img_base64
 
-# =============================================================================
-# Main section to test the function
-# =============================================================================
+
+# Example usage
 if __name__ == '__main__':
-    test_symbol = "ALK"  # or any other issuer you want to test
-    # model, acc, report, future_prediction = train_and_evaluate_stock_model_with_image(
-    #     stock_symbol=test_symbol,
-    #     train_ratio=0.7,
-    #     rolling_window=5,
-    #     n_units=50,
-    #     dropout_rate=0.2,
-    #     epochs=20,
-    #     batch_size=32
-    # )
-    #
-    # if model is not None:
-    #     print("\nFinished training and prediction.")
-    #     print(f"Future prediction code for {test_symbol}: "
-    #           f"{future_prediction} (1=Up, 0=Down/StaySame)")
-    #     print(f"\nAccuracy {acc}")
+    test_symbol = "ALK"
+    model, acc, report, future_prediction = train_and_evaluate_stock_model_with_image(
+        stock_symbol=test_symbol,
+        train_ratio=0.7,
+        rolling_window=5,
+        n_units=50,
+        dropout_rate=0.2,
+        epochs=20,
+        batch_size=32
+    )
+
+    if model is not None:
+        print("\nFinished training and prediction.")
+        print(f"Future prediction code for {test_symbol}: "
+              f"{future_prediction} (1=Up, 0=Down/StaySame)")
+        print(f"\nAccuracy {acc}")
