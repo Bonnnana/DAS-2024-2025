@@ -5,12 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="884bd717-6f5c-4311-bd92-ec1a011ed9a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Homework 4/Design Patterns - Documentation.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Homework 3/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Homework 3/stock-app-web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/stock-app-web/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Homework 3/stockApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 3/stockApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/Command Pattern.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/issuers_scraping_service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/issuers_scraping_service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/issuers_scraping_service/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/issuers_scraping_service/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/lstm_model_service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/lstm_model_service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/lstm_model_service/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/lstm_model_service/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/most_liquid_service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/most_liquid_service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/most_liquid_service/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/most_liquid_service/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/technical_analysis_service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/technical_analysis_service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/microservices/technical_analysis_service/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/microservices/technical_analysis_service/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/Analyse.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/Analyse.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/AnalyseBody.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/AnalyseBody.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/AnalyseButtons.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/AnalyseButtons.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/AnalyseHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/AnalyseHeader.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/DropDown.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/DropDown.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/Fundamental.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/Fundamental.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/FundamentalBody.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/FundamentalBody.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/Predict.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/Predict.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/PredictBody.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/components/StockPageComponents/PredictBody.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stock-app-web/src/dataStorage/api.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stock-app-web/src/dataStorage/api.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework 4/stockApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 4/stockApi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +40,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Dockerfile" />
         <option value="Python Script" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -81,6 +101,7 @@
     "Python.probno.executor": "Debug",
     "Python.stockApi (1).executor": "Run",
     "Python.stockApi.executor": "Run",
+    "Python.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -115,7 +136,7 @@
       <recent name="C:\Users\Bojana\Desktop\Petti Semestar\Dizajn i arhitektura na softver\DAS-2024-2025\Homework 4\microservices\most_liquid_service" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.proba">
+  <component name="RunManager">
     <configuration name="collecting_news_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DAS-2024-2025" />
       <option name="ENV_FILES" value="" />
@@ -285,7 +306,7 @@
       <workItem from="1735498040059" duration="444000" />
       <workItem from="1736692601150" duration="1234000" />
       <workItem from="1736732756278" duration="28000" />
-      <workItem from="1737205818313" duration="13096000" />
+      <workItem from="1737205818313" duration="36297000" />
     </task>
     <task id="LOCAL-00001" summary="Uploading firts homework">
       <option name="closed" value="true" />
@@ -343,7 +364,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737219839984</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Modifying patterns documentation">
+      <option name="closed" value="true" />
+      <created>1737220206461</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1737220206461</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,18 +385,8 @@
     <MESSAGE value="Adding Homework 3" />
     <MESSAGE value="Adding Homework 3 directory and most_liquid file" />
     <MESSAGE value="Adding microservices and singleton pattern" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding microservices and singleton pattern" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Homework 4/microservices/lstm_model_service/app.py</url>
-          <line>19</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Modifying patterns documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifying patterns documentation" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DAS_2024_2025$model.coverage" NAME="model Coverage Results" MODIFIED="1736269711396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 3" />
@@ -376,6 +395,7 @@
     <SUITE FILE_PATH="coverage/DIANS$filter1.coverage" NAME="filter1 Coverage Results" MODIFIED="1730929634953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DAS_2024_2025$stockApi__1_.coverage" NAME="stockApi (1) Coverage Results" MODIFIED="1736385384067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 4" />
     <SUITE FILE_PATH="coverage/DAS_2024_2025$stockApi.coverage" NAME="stockApi Coverage Results" MODIFIED="1734779192390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webApi" />
+    <SUITE FILE_PATH="coverage/DAS_2024_2025$test.coverage" NAME="test Coverage Results" MODIFIED="1737240096340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 4/microservices/fundamental_analysis_service" />
     <SUITE FILE_PATH="coverage/DIANS$import_all_stocks_filter.coverage" NAME="import_all_stocks_filter Coverage Results" MODIFIED="1731020498316" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DAS_2024_2025$data_pipeline.coverage" NAME="data_pipeline Coverage Results" MODIFIED="1736384943977" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework 4" />
     <SUITE FILE_PATH="coverage/DIANS$probno.coverage" NAME="probno Coverage Results" MODIFIED="1731189392361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

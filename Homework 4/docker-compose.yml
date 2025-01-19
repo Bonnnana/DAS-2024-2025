@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  stock-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - issuers-scraping-service
+      - technical-analysis-service
+      - fundamental-analysis-service
+      - lstm-model-service
+      - most-liquid-service
+  issuers-scraping-service:
+    build:
+      context: .
+      dockerfile: ./microservices/issuers_scraping_service/Dockerfile
+    ports:
+      - "5001:5001"
+  technical-analysis-service:
+    build:
+      context: .
+      dockerfile: ./microservices/technical_analysis_service/Dockerfile
+    ports:
+      - "5002:5002"
+  fundamental-analysis-service:
+    build:
+      context: .
+      dockerfile: ./microservices/fundamental_analysis_service/Dockerfile
+    ports:
+      - "5003:5003"
+  lstm-model-service:
+    build:
+      context: .
+      dockerfile: ./microservices/lstm_model_service/Dockerfile
+    ports:
+      - "5004:5004"
+  most-liquid-service:
+    build:
+      context: .
+      dockerfile: ./microservices/most_liquid_service/Dockerfile
+    ports:
+      - "5005:5005"
+  stock-app-web:
+    build:
+      context: ./stock-app-web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - stock-api
+    environment:
+      - REACT_APP_API_URL=http://stock-api:5000

@@ -11,11 +11,11 @@ app = Flask(__name__)
 CORS(app)
 
 # Microservice URLs
-SCRAPING_SERVICE_URL = "http://localhost:5001"
-TECHNICAL_ANALYSIS_SERVICE_URL = "http://localhost:5002"
-FUNDAMENTAL_ANALYSIS_SERVICE_URL = "http://localhost:5003"
-LSTM_MODEL_SERVICE_URL = "http://localhost:5004"
-MOST_LIQUID_SERVICE_URL = "http://localhost:5005"
+SCRAPING_SERVICE_URL = "http://issuers-scraping-service:5001"
+TECHNICAL_ANALYSIS_SERVICE_URL = "http://technical-analysis-service:5002"
+FUNDAMENTAL_ANALYSIS_SERVICE_URL = "http://fundamental-analysis-service:5003"
+LSTM_MODEL_SERVICE_URL = "http://lstm-model-service:5004"
+MOST_LIQUID_SERVICE_URL = "http://most-liquid-service:5005"
 
 
 @app.route('/scrape-historical-data', methods=['POST'])
@@ -96,4 +96,4 @@ if __name__ == '__main__':
     except requests.RequestException as e:
         print(f"Error initializing database and running pipeline: {e}")
 
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

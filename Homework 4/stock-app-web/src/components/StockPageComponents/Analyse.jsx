@@ -10,8 +10,6 @@ const Analyse = (props) => {
   const { sendRequest, status, data, error } = useHttp(getTechnical, true);
   const [submitResponse, setSubmitResponse] = useState(false);
 
-  // Memoize the button click handler so that
-  // it doesn't get re-created on every render
   const handleButtonClick = useCallback(
     (timeframe) => {
       setSubmitResponse(false);

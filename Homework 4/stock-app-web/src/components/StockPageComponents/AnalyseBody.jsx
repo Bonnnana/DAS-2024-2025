@@ -15,7 +15,7 @@ const AnalyseBody = (props) =>{
     };
     useEffect(() => {
       if (props.status === "completed") {
-        setSell(props.data["final_recommendation"] || ""); // Update sell when data is available
+        setSell(props.data["final_recommendation"] || "");
       }
     }, [props.status]);
     if(props.status==="completed" && props.data!=null){

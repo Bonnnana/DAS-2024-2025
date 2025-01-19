@@ -47,4 +47,4 @@ if __name__ == '__main__':
     if not os.path.exists(SENTIMENT_DATA_FILE):
         print(f"Sentiment data file '{SENTIMENT_DATA_FILE}' not found. Sentiment analysis will create it as needed.")
 
-    app.run(port=5003, debug=True)
+    app.run(host='0.0.0.0', port=5003, debug=True)
